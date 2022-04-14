@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Create Odd</title>
+    </h:head>
+    <h:body>
+        <h:form id="addOddForm">
+            <h:button value="Home" outcome="upcomingMatches"/>
+            <h:panelGrid columns="3">
+                <f:facet name="header">
+                    <h:outputText style="text-align: center;" value="Match: #{bookmakerBean.matchLabel}"/>
+                </f:facet>
+                <h:outputLabel for="odd1">Team 1 Win: </h:outputLabel>
+                <h:inputText id="odd1" value="#{bookmakerBean.win_odd1}" required="true">
+                    <f:validateDoubleRange minimum="1.0"/>
+                </h:inputText>
+                <h:message for="odd1"/>
+                <h:outputLabel for="odd2">Team 2 Win: </h:outputLabel>
+                <h:inputText id="odd2" value="#{bookmakerBean.win_odd2}" required="true">
+                    <f:validateDoubleRange minimum="1.0"/>
+                </h:inputText>
+                <h:message for="odd2"/>
+                <h:outputLabel for="odd3">Tired: </h:outputLabel>
+                <h:inputText id="odd3" value="#{bookmakerBean.win_odd3}" required="true">
+                    <f:validateDoubleRange minimum="1.0"/>
+                </h:inputText>
+                <h:message for="odd3"/>
+                <h:outputText value=""/>
+                <h:commandButton update="msgs" action="#{bookmakerBean.createOdd}" value="Create Odd"/>
+                <h:outputText value=""/>
+            </h:panelGrid>
+            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+        </h:form>
+    </h:body>
+</f:view>
+<style type="text/css">
+    body {
+        background: #8E73B6;
+        font-family: "Lucida Console", "Courier New", monospace;
+    }
+
+    form {
+        margin-left: 20%;
+        margin-right: 20%;
+        margin-top: 10%;
+        alignment-baseline: center;
+        border-radius: 5px;
+        color: #ffd79d;
+    }
+
+    a {
+        color: #ffd79d;
+        align-self: center;
+    }
+
+    input[type=button] {
+        width: 20%;
+        background-color: #ffd79d;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit] {
+        width: fit-content;
+        background-color: #ffd79d;
+        color: #320d3e;
+        padding: 14px;
+        /*margin-right: 20px;*/
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    table {
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style>
+</html>

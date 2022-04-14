@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>Register</title>
+    </h:head>
+    <h:body>
+    <h:form id="registerForm">
+        <h3>Create new account</h3>
+        <h:panelGrid columns="3">
+            <h:outputLabel for="name">Username:</h:outputLabel>
+            <h:inputText id="name" value="#{loginBean.username}" required="true"
+                         requiredMessage="Please choose your username" maxlength="30"/>
+            <h:message for="name"/>
+            <h:outputLabel for="password">Password: </h:outputLabel>
+            <h:inputSecret id="password" value="#{loginBean.password}" required="true"
+                           requiredMessage="Please enter your password"
+                           validatorMessage="Password must contain atleast one lowercase character,
+					uppercase character, a digit and it's length must be between 6 and 20 characters">
+                <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})"/>
+            </h:inputSecret>
+            <h:message for="password"/>
+            <h:outputLabel for="role">You register to become: </h:outputLabel>
+            <h:selectOneMenu id="role"  value="#{loginBean.role}" required="true"
+                             requiredMessage="Please choose your role">
+                <f:selectItem itemValue="1" itemLabel="Bettor" />
+                <f:selectItem itemValue="2" itemLabel="Bookmaker" />
+            </h:selectOneMenu>
+            <h:message for="role"/>
+        </h:panelGrid>
+        <h:commandButton action="#{loginBean.register}" value="Register"/>
+    </h:form>
+    <br />
+    <h:link value="I already have an account" outcome="login"/>
+    </h:body>
+</f:view>
+</html>

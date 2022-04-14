@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:body>
+        <h:form id="bettingForm">
+            <h:panelGrid columns="3">
+                <h:outputLabel>Match: </h:outputLabel>
+                <h:outputLabel>#{bettingBean.m.m_team1} vs #{bettingBean.m.m_team2}</h:outputLabel>
+                <h:outputLabel></h:outputLabel>
+                <h:outputLabel for="otype">Choose odd:</h:outputLabel>
+                <h:selectOneMenu id="otype" value="#{bettingBean.odd_id}" required="true"
+                                 requiredMessage="Please choose the type of odd">
+                    <f:selectItems value="#{bettingBean.oddsList}" var="o"
+                                   itemLabel="#{o.o_type}" itemValue="#{o.o_id}"/>
+                </h:selectOneMenu>
+                <h:message for="otype"/>
+                <h:outputLabel for="limcoins">Betting limcoins: </h:outputLabel>
+                <h:inputText id="limcoins" value="#{bettingBean.limcoins}" required="true">
+                    <f:validateLongRange minimum="10" maximum="10000"/>
+                </h:inputText>
+                <h:message for="limcoins"/>
+            </h:panelGrid>
+            <h:commandButton action="#{bettingBean.betting}" value="Betting"/>
+        </h:form>
+    </h:body>
+</f:view>
+</html>

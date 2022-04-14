@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Manage Users</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:button value="Home" outcome="index"/>
+            <p:dataTable value="#{adminstratorBean.userDataModel}" var="user"
+                         scrollable="true" scrollHeight="500"
+                         styleClass="mTable" frozenRows="0">
+                <p:column headerText="User" styleClass="colx">
+                    <h:outputText value="#{user.username}"/>
+                </p:column>
+                <p:column headerText="Role" styleClass="colx">
+                    <h:outputText value="#{user.roleStr}"/>
+                </p:column>
+                <p:column headerText="Limcoins" styleClass="colx">
+                    <h:outputText value="#{user.u_limcoins}"/>
+                </p:column>
+                <p:column headerText="Status" styleClass="colx">
+                    <h:outputText value="#{user.statusStr}"/>
+                </p:column>
+                <p:column headerText="Modify User" styleClass="colx">
+                    <h:commandButton value="#{user.modifyStr}" action="#{adminstratorBean.updateUser}"/>
+                </p:column>
+            </p:dataTable>
+            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+        </h:form>
+    </h:body>
+</f:view>
+<h:outputStylesheet>
+    body {
+        background: linear-gradient(135deg, #9198e5, #8E73B6, #8E73B6, #6A4A9B, #320d3e);
+        font-family: "Lucida Console", "Courier New", monospace;
+        alignment-baseline: center;
+    }
+
+    .mTable {
+        margin-top: 20px;
+        table-layout: auto;
+        margin-left: 15%;
+        margin-right: 15%;
+        background: #1C1B1D;
+    }
+
+    .ui-datatable td {
+        border: 0px !important;
+    }
+
+    .colx {
+        text-align: center;
+    }
+
+    .colx {
+        background: #1C1B1D;
+        color: #ffd79d;
+    }
+
+    input[type=submit] {
+        background: #ffd79d;
+        color: #320d3e;
+    }
+
+    input[type=button] {
+        width: 20%;
+        background-color: #8E73B6;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</h:outputStylesheet>
+</html>

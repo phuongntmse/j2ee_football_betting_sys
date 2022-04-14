@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Betting</title>
+    </h:head>
+    <h:body>
+        <h:form id="bettingForm">
+            <h:button value="Home" outcome="upcomingMatches"/><br/>
+            <div class="form_border">
+            <h3 style="text-align: center">Match: #{bettorBean.matchLabel}</h3>
+            <h:panelGrid columns="3" >
+                <h:outputLabel for="bookmaker">Choose bookmaker:</h:outputLabel>
+                <h:selectOneMenu id="bookmaker" value="#{bettorBean.bookmakerid}" required="true"
+                                 requiredMessage="Please choose the type of odd" style="width: 100%;">
+                    <f:selectItems value="#{bettorBean.listBookmaker}"/>
+                    <f:ajax execute="@this"
+                            render="otype"/>
+                </h:selectOneMenu>
+                <h:message for="otype" />
+                <h:outputLabel for="otype">Choose odd:</h:outputLabel>
+                <h:selectOneMenu id="otype" value="#{bettorBean.oddid}" required="true"
+                                 requiredMessage="Please choose the type of odd" style="width: 100%;">
+                    <f:selectItems value="#{bettorBean.oddList}" var="odd" itemValue="#{odd.o_id}"
+                                   itemLabel="#{odd.typeStr}"/>
+                    <f:ajax execute="@this"
+                            render="profit"/>
+                </h:selectOneMenu>
+                <h:message for="otype" />
+                <h:outputLabel for="profit">Profit: </h:outputLabel>
+                <h:outputText id="profit" value="x#{bettorBean.profit}"/>
+                <h:message for="profit"/>
+                <h:outputLabel for="limcoins">Betting limcoins: </h:outputLabel>
+                <h:inputText id="limcoins" value="#{bettorBean.limcoins}" required="true" style="width: 100%;">
+                    <f:validateLongRange minimum="10" maximum="#{loginBean.maxLimcoins}"/>
+                </h:inputText>
+                <h:message for="limcoins" />
+                <h:outputText value=""/>
+                <h:commandButton action="#{bettorBean.betting}" value="Betting"/>
+
+            </h:panelGrid>
+            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+            </div>
+        </h:form>
+    </h:body>
+</f:view>
+<style type="text/css">
+    body {
+        background: #ffd79d;
+        font-family: "Lucida Console", "Courier New", monospace;
+    }
+
+    form {
+        margin-left: 20%;
+        margin-right: 20%;
+        margin-top: 10%;
+        alignment-baseline: center;
+        border-radius: 5px;
+        color: #320d3e;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 12px 12px;
+        margin: 8px 0;
+        display: inline-block;
+        background-color: white;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    a {
+        color: #8E73B6;
+        align-self: center;
+    }
+
+    input[type=button] {
+        width: 20%;
+        background-color: #8E73B6;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit] {
+        width: fit-content;
+        background-color: #8E73B6;
+        color: #320d3e;
+        padding: 14px;
+        /*margin-right: 20px;*/
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    table {
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style>
+</html>

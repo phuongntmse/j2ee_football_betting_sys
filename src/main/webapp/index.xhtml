@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <head>
+        <title>Betting System</title>
+    </head>
+    <h:body>
+        <div class="split left">
+            <div class="table_border">
+                <p:dataTable value="#{rankingBean.userDataModel}" var="user"
+                             styleClass="mTable" scrollable="true" scrollHeight="400">
+                    <p:column headerText="Rank" style="width: 60px;text-align: right;">
+                        <h:outputText value="##{rankingBean.userDataModel.rowIndex+1}"/>
+                    </p:column>
+                    <p:column headerText="Player" style="width: 180px; text-align: left;">
+                        <h:outputText value="#{user.username}"/>
+                    </p:column>
+                    <p:column headerText="Limcoins" style="width: 40%; text-align: center;">
+                        <h:outputText value="#{user.u_limcoins}"/>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </div>
+        <div class="split right">
+            <h:form>
+                <h:panelGrid columns="1">
+                    <h:button value="Upcoming Matches" outcome="upcomingMatches"/>
+                    <h:button value="Manage Users" outcome="manageUser" rendered="#{loginBean.admin}"/>
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                    <h:commandButton value="Sync Matches" action="#{adminstratorBean.syncMatches}"
+                                     rendered="#{loginBean.admin}"/>
+                    <h:commandButton value="Update Matches Result" action="#{adminstratorBean.updateMatchesResult}"
+                                     rendered="#{loginBean.admin}"/>
+                    <h:button value="My Odds" outcome="myOdds" rendered="#{loginBean.bookmaker}"/>
+                    <h:button value="My Bets" outcome="myBets" rendered="#{loginBean.bettor}"/>
+                    <h:commandButton value="Log out" action="#{loginBean.logout}"/>
+                </h:panelGrid>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+<style type="text/css">
+
+    body {
+        background: linear-gradient(45deg, #9198e5, #8E73B6, #8E73B6, #6A4A9B, #320d3e);
+        font-family: "Lucida Console", "Courier New", monospace;
+    }
+
+    .split {
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    .left {
+        width: 40%;
+    }
+
+    .right {
+        width: 60%;
+        right: 0;
+    }
+
+
+    form {
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-top: 10%;
+        alignment-baseline: center;
+        border-radius: 5px;
+        color: #ffd79d;
+    }
+
+    a {
+        color: #ffd79d;
+        align-self: center;
+    }
+
+    .table_border {
+        margin-top: 5%;
+        margin-left: 10%;
+        background: #320d3e;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    .mTable {
+        background: #ffd79d;
+        color: #320d3e;
+    }
+
+    .ui-widget-content {
+        border-bottom: #6A4A9B;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #8E73B6;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=button] {
+        width: 100%;
+        background-color: #8E73B6;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+</style>
+</html>
